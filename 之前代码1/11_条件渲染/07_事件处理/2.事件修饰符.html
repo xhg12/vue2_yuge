@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>玉树临风美少年，揽镜自顾夜不眠</title>
+    <script src="../js/vue.js"></script>
+    <style>
+      * {
+        margin-top: 20px;
+      }
+      .demo1 {
+        height: 50px;
+        background-color: pink;
+      }
+      .box1 {
+        padding: 5px;
+        background-color: royalblue;
+      }
+      .box2 {
+        padding: 5px;
+        background-color: pink;
+      }
+      .list {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+        overflow: auto;
+      }
+      li {
+        height: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 
+      1.	.prevent：阻止默认行为（事件）（常用）
+      2.	.stop：阻止事件冒泡（常用）
+      3.	.once：事件只触发一次（常用）
+      4.	.capture：使用事件的捕获模式
+      5.	.self：只有event.target是当前操作的元素是才触发事件
+      6.	.passive：事件的默认行为立即执行，无需等待事件回调执行完毕
+     -->
+    <div id="app">
+      <h2>我来自{{name}}，欢迎来到我的世界</h2>
+      <!-- .prevent：阻止默认行为（事件）（常用） -->
+      <a href="http://www.baidu.com" @click="showInfo">点我提示信息</a>
+
+      <!-- .stop：阻止事件冒泡（常用） -->
+      <div class="demo1" @click="showInfo">
+        <button @click.stop="showInfo">点我提示信息</button>
+        <!-- 修饰符可以连续写 -->
+        <!-- <a href="http://www.baidu.com" @click.stop.prevent="showInfo"
+          >点我提示信息</a
+        > -->
+      </div>
+      <!-- .once：事件只触发一次（常用） -->
+      <button @click.once="showInfo">点我提示信息</button>
+
+      <!-- 使用事件的捕获模式 -->
+      <div class="box1" @click.capture="showMsg(1)">
+        div1
+        <div class="box2" @click="showMsg(2)">div2</div>
+      </div>
+
+      <!-- .self：只有event.target是当前操作的元素是才触发事件 -->
+      <div class="demo1" @click="showInfo">
+        <button @click="showInfo">点我提示信息</button>
+      </div>
+
+      <ul @scroll="demo" class="list">
+        <!-- 还有一个wheel(只要鼠标滚轮在滚就会触发不管滚动条到没到顶) -->
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+      </ul>
+    </div>
+
+    <script>
+      Vue.config.productionTip = false;
+      new Vue({
+        el: '#app',
+        data: {
+          name: '湖南',
+        },
+        methods: {
+          showInfo(e) {
+            //alert('屌毛你好！');
+            console.log(e.target);
+          },
+          showMsg(msg) {
+            console.log(msg);
+          },
+          demo() {
+            for (let i = 0; i < 10000; i++) {
+              console.log('$');
+            }
+            console.log('累坏了吧！');
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

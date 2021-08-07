@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>玉树临风美少年，揽镜自顾夜不眠</title>
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>我来自{{name}}，欢迎来到我的世界</h2>
+      <button v-on:click="showInfo1">点我提示信息1(不传参)</button>
+      <button @click="showInfo2">点我提示信息2(传参)</button>
+    </div>
+
+    <script>
+      Vue.config.productionTip = false;
+      new Vue({
+        el: '#app',
+        data: {
+          name: '湖南',
+        },
+        methods: {
+          showInfo1() {
+            //alert('老铁，你好');
+            //console.log(this);//此处的this是vm
+            console.log(event.target.innerText);
+          },
+          showInfo2(event, number) {
+            //console.log(this);//此处的this是vm
+            console.log(event, number);
+            alert('老铁，你好');
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
